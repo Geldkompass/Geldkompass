@@ -1,0 +1,17 @@
+---
+interface Props {
+  class?: string;
+}
+const { class: className = '' } = Astro.props;
+---
+
+<a href="/" class={`group flex items-center gap-2.5 ${className}`}>
+  <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" class="shrink-0">
+    <circle cx="17" cy="17" r="15.5" stroke="var(--color-gold-500)" stroke-width="2" />
+    <circle cx="17" cy="17" r="1.6" fill="var(--color-gold-500)" />
+    <path d="M17 7L20.5 15.5L17 27L13.5 15.5L17 7Z" fill="var(--color-navy-900)" class="transition-colors group-hover:fill-[var(--color-gold-600)]" />
+  </svg>
+  <span class="font-display font-semibold text-xl tracking-tight text-navy-950" style="color: var(--color-navy-950)">
+    Geldkompass
+  </span>
+</a>

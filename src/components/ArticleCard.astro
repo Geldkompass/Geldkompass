@@ -1,0 +1,77 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  entry: CollectionEntry<'blog'>;
+  featured?: boolean;
+}
+const { entry, featured = false } = Astro.props;
+const { title, description, pubDate, category } = entry.data;
+
+const categoryStyles: Record<string, { bg: string; text: string; label: string }> = {
+  Investieren: { bg: 'var(--color-cat-investieren)', text: '#eaf2f8', label: 'Investieren' },
+  Steuern: { bg: 'var(--color-cat-steuern)', text: '#fbf3e4', label: 'Steuern' },
+  Wirtschaft: { bg: 'var(--color-cat-wirtschaft)', text: '#eaf3ee', label: 'Wirtschaft' },
+};
+const style = categoryStyles[category];
+
+const formattedDate = pubDate.toLocaleDateString('de-AT', {
+  day: '2-digit',
+  month: 'long',
+  year: 'numeric',
+});
+---
+
+<a
+  href={`/blog/${entry.id}`}
+  class:list={[
+    'group flex flex-col overflow-hidden rounded-2xl border transition-all hover:-translate-y-0.5 hover:shadow-lg',
+    featured ? 'sm:flex-row' : '',
+  ]}
+  style="border-color: var(--color-cream-200); background-color: white;"
+>
+  <div
+    class:list={[
+      'flex items-center justify-center',
+      featured ? 'sm:w-2/5 h-40 sm:h-auto' : 'h-32',
+    ]}
+    style={`background: linear-gradient(135deg, ${style.bg}, var(--color-navy-950));`}
+  >
+    <svg width="40" height="40" viewBox="0 0 34 34" fill="none" class="opacity-90">
+      <circle cx="17" cy="17" r="15.5" stroke={style.text} stroke-width="1.5" opacity="0.6" />
+      <path d="M17 7L20.5 15.5L17 27L13.5 15.5L17 7Z" fill={style.text} opacity="0.9" />
+    </svg>
+  </div>
+
+  <div class="flex flex-1 flex-col gap-2.5 p-6">
+    <div class="flex items-center gap-3">
+      <span
+        class="rounded-full px-2.5 py-0.5 text-xs font-semibold"
+        style={`background-color: ${style.bg}1a; color: ${style.bg};`}
+      >
+        {style.label}
+      </span>
+      <time datetime={pubDate.toISOString()} class="text-xs" style="color: var(--color-ink-500);">
+        {formattedDate}
+      </time>
+    </div>
+    <h3
+      class:list={['font-display font-semibold leading-snug transition-colors', featured ? 'text-2xl' : 'text-lg']}
+      style="color: var(--color-navy-950);"
+    >
+      {title}
+    </h3>
+    <p class="line-clamp-3 text-sm leading-relaxed" style="color: var(--color-ink-700);">
+      {description}
+    </p>
+    <span
+      class="mt-auto inline-flex items-center gap-1.5 pt-2 text-sm font-semibold"
+      style="color: var(--color-navy-700);"
+    >
+      Weiterlesen
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" class="transition-transform group-hover:translate-x-1">
+        <path d="M3 7H11M11 7L7.5 3.5M11 7L7.5 10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </span>
+  </div>
+</a>

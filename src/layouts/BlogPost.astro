@@ -1,0 +1,82 @@
+---
+import Layout from './Layout.astro';
+import NewsletterSignup from '../components/NewsletterSignup.astro';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  entry: CollectionEntry<'blog'>;
+}
+const { entry } = Astro.props;
+const { title, description, pubDate, updatedDate, category, tags } = entry.data;
+
+const categoryStyles: Record<string, string> = {
+  Investieren: 'var(--color-cat-investieren)',
+  Steuern: 'var(--color-cat-steuern)',
+  Wirtschaft: 'var(--color-cat-wirtschaft)',
+};
+const accent = categoryStyles[category];
+
+const formattedDate = pubDate.toLocaleDateString('de-AT', {
+  day: '2-digit',
+  month: 'long',
+  year: 'numeric',
+});
+---
+
+<Layout title={title} description={description} type="article">
+  <article class="mx-auto max-w-3xl px-5 py-14 sm:px-8">
+    <a href="/blog" class="inline-flex items-center gap-1.5 text-sm font-medium" style="color: var(--color-navy-700);">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <path d="M11 7H3M3 7L6.5 3.5M3 7L6.5 10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+      Zurück zum Blog
+    </a>
+
+    <header class="mt-6">
+      <span
+        class="rounded-full px-2.5 py-0.5 text-xs font-semibold"
+        style={`background-color: ${accent}1a; color: ${accent};`}
+      >
+        {category}
+      </span>
+      <h1 class="mt-4 font-display text-3xl font-bold leading-tight sm:text-4xl" style="color: var(--color-navy-950);">
+        {title}
+      </h1>
+      <div class="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm" style="color: var(--color-ink-500);">
+        <span>Von Luis</span>
+        <span aria-hidden="true">&middot;</span>
+        <time datetime={pubDate.toISOString()}>{formattedDate}</time>
+        {updatedDate && (
+          <>
+            <span aria-hidden="true">&middot;</span>
+            <span>Aktualisiert am {updatedDate.toLocaleDateString('de-AT', { day: '2-digit', month: 'long', year: 'numeric' })}</span>
+          </>
+        )}
+      </div>
+    </header>
+
+    <div class="prose-article mt-10">
+      <slot />
+    </div>
+
+    {tags.length > 0 && (
+      <div class="mt-10 flex flex-wrap gap-2 border-t pt-6" style="border-color: var(--color-cream-200);">
+        {tags.map((tag) => (
+          <span class="rounded-full px-3 py-1 text-xs" style="background-color: var(--color-cream-100); color: var(--color-ink-700);">
+            #{tag}
+          </span>
+        ))}
+      </div>
+    )}
+
+    <div class="mt-8 rounded-xl border px-5 py-4 text-sm leading-relaxed" style="border-color: var(--color-cream-200); background-color: var(--color-cream-100); color: var(--color-ink-700);">
+      <strong style="color: var(--color-ink-900);">Hinweis:</strong> Dieser Artikel dient der
+      allgemeinen Bildung und stellt keine individuelle Anlage- oder Steuerberatung dar. Alle
+      Angaben ohne Gewähr — mehr dazu im <a href="/impressum#disclaimer" class="underline" style="text-decoration-color: var(--color-gold-500);">Disclaimer</a>.
+    </div>
+
+    <div class="mt-14">
+      <NewsletterSignup />
+    </div>
+  </article>
+</Layout>

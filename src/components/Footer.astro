@@ -1,0 +1,49 @@
+---
+import Logo from './Logo.astro';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t" style="border-color: var(--color-cream-200); background-color: var(--color-navy-950);">
+  <div class="mx-auto max-w-6xl px-5 py-14 sm:px-8">
+    <div class="grid gap-10 sm:grid-cols-2 md:grid-cols-4">
+      <div class="md:col-span-2">
+        <a href="/" class="inline-flex items-center gap-2.5">
+          <svg width="30" height="30" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="17" cy="17" r="15.5" stroke="var(--color-gold-500)" stroke-width="2" />
+            <circle cx="17" cy="17" r="1.6" fill="var(--color-gold-500)" />
+            <path d="M17 7L20.5 15.5L17 27L13.5 15.5L17 7Z" fill="var(--color-cream-50)" />
+          </svg>
+          <span class="font-display text-lg font-semibold text-white">Geldkompass</span>
+        </a>
+        <p class="mt-4 max-w-sm text-sm leading-relaxed" style="color: var(--color-navy-500);">
+          Orientierung im Finanz- und Steuerdschungel — verständlich erklärt, mit besonderem
+          Fokus auf Kapitalanlage und Steuern in Österreich.
+        </p>
+      </div>
+
+      <div>
+        <h3 class="font-display text-sm font-semibold text-white">Navigation</h3>
+        <ul class="mt-4 space-y-2.5 text-sm" style="color: var(--color-navy-500);">
+          <li><a href="/blog" class="hover:text-white">Blog</a></li>
+          <li><a href="/ueber-mich" class="hover:text-white">Über mich</a></li>
+          <li><a href="/newsletter" class="hover:text-white">Newsletter</a></li>
+          <li><a href="/kontakt" class="hover:text-white">Kontakt</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="font-display text-sm font-semibold text-white">Rechtliches</h3>
+        <ul class="mt-4 space-y-2.5 text-sm" style="color: var(--color-navy-500);">
+          <li><a href="/impressum" class="hover:text-white">Impressum</a></li>
+          <li><a href="/impressum#disclaimer" class="hover:text-white">Disclaimer</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-12 flex flex-col gap-3 border-t pt-6 text-xs sm:flex-row sm:items-center sm:justify-between" style="border-color: var(--color-navy-800); color: var(--color-navy-600);">
+      <p>&copy; {year} Geldkompass. Alle Angaben ohne Gewähr.</p>
+      <p>Keine Anlageberatung — nur Bildung. Siehe <a href="/impressum#disclaimer" class="underline hover:text-white">Disclaimer</a>.</p>
+    </div>
+  </div>
+</footer>

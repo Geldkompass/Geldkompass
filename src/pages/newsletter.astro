@@ -1,0 +1,45 @@
+---
+import Layout from '../layouts/Layout.astro';
+import NewsletterSignup from '../components/NewsletterSignup.astro';
+
+const perks = [
+  {
+    title: 'Neue Artikel zuerst',
+    description: 'Kein Scrollen im Feed nötig — neue Beiträge landen direkt in deinem Postfach.',
+  },
+  {
+    title: 'Steuer-Updates',
+    description: 'Wichtige Änderungen bei KESt, Meldefonds & Co., sobald sie relevant werden.',
+  },
+  {
+    title: 'Kein Spam',
+    description: 'Unregelmäßig, dafür nur, wenn es wirklich etwas zu sagen gibt.',
+  },
+];
+---
+
+<Layout
+  title="Newsletter"
+  description="Der Geldkompass-Newsletter: neue Artikel und Steuer-Updates direkt ins Postfach — bald verfügbar."
+>
+  <div class="mx-auto max-w-2xl px-5 py-16 sm:px-8">
+    <h1 class="font-display text-4xl font-bold" style="color: var(--color-navy-950);">Newsletter</h1>
+    <p class="mt-4 text-lg leading-relaxed" style="color: var(--color-ink-700);">
+      Der Geldkompass-Newsletter ist Teil eines größeren Plans: Neben dem Blog sollen mit der Zeit
+      weitere Formate dazukommen — angefangen beim Newsletter, langfristig vielleicht mehr.
+    </p>
+
+    <div class="mt-10 grid gap-6 sm:grid-cols-3">
+      {perks.map((perk) => (
+        <div class="rounded-xl border p-5" style="border-color: var(--color-cream-200); background-color: white;">
+          <h3 class="font-display text-base font-semibold" style="color: var(--color-navy-950);">{perk.title}</h3>
+          <p class="mt-2 text-sm leading-relaxed" style="color: var(--color-ink-700);">{perk.description}</p>
+        </div>
+      ))}
+    </div>
+
+    <div class="mt-12">
+      <NewsletterSignup />
+    </div>
+  </div>
+</Layout>

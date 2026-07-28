@@ -1,0 +1,77 @@
+---
+import Logo from './Logo.astro';
+
+const navItems = [
+  { href: '/blog', label: 'Blog' },
+  { href: '/ueber-mich', label: 'Über mich' },
+  { href: '/newsletter', label: 'Newsletter' },
+  { href: '/kontakt', label: 'Kontakt' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="sticky top-0 z-50 border-b" style="background-color: var(--color-cream-50); border-color: var(--color-cream-200);">
+  <div class="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 sm:px-8">
+    <Logo />
+
+    <nav class="hidden items-center gap-8 md:flex">
+      {navItems.map((item) => {
+        const isActive = currentPath === item.href || currentPath.startsWith(item.href + '/');
+        return (
+          <a
+            href={item.href}
+            class="font-medium text-sm transition-colors"
+            style={`color: ${isActive ? 'var(--color-navy-950)' : 'var(--color-ink-700)'}`}
+          >
+            {item.label}
+            {isActive && <span class="mt-0.5 block h-0.5 rounded-full" style="background-color: var(--color-gold-500);" />}
+          </a>
+        );
+      })}
+    </nav>
+
+    <button
+      id="menu-toggle"
+      class="flex h-9 w-9 items-center justify-center rounded-md md:hidden"
+      aria-label="Menü öffnen"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
+      <svg id="icon-open" width="22" height="22" viewBox="0 0 22 22" fill="none">
+        <path d="M3 6H19M3 11H19M3 16H19" stroke="var(--color-navy-950)" stroke-width="1.8" stroke-linecap="round" />
+      </svg>
+      <svg id="icon-close" width="22" height="22" viewBox="0 0 22 22" fill="none" class="hidden">
+        <path d="M4 4L18 18M18 4L4 18" stroke="var(--color-navy-950)" stroke-width="1.8" stroke-linecap="round" />
+      </svg>
+    </button>
+  </div>
+
+  <nav id="mobile-menu" class="hidden flex-col gap-1 border-t px-5 pb-4 md:hidden" style="border-color: var(--color-cream-200);">
+    {navItems.map((item) => (
+      <a
+        href={item.href}
+        class="rounded-md px-2 py-3 font-medium text-sm"
+        style="color: var(--color-ink-700);"
+      >
+        {item.label}
+      </a>
+    ))}
+  </nav>
+</header>
+
+<script>
+  const toggle = document.getElementById('menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+  const iconOpen = document.getElementById('icon-open');
+  const iconClose = document.getElementById('icon-close');
+
+  toggle?.addEventListener('click', () => {
+    const isOpen = menu?.classList.contains('hidden');
+    menu?.classList.toggle('hidden', !isOpen);
+    menu?.classList.toggle('flex', isOpen);
+    toggle.setAttribute('aria-expanded', String(isOpen));
+    iconOpen?.classList.toggle('hidden', isOpen);
+    iconClose?.classList.toggle('hidden', !isOpen);
+  });
+</script>
