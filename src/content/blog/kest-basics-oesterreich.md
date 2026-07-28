@@ -1,7 +1,7 @@
 ---
 title: "KESt einfach erklärt – was wird bei Aktien & ETFs in Österreich besteuert?"
 description: "Die Grundlagen der Kapitalertragsteuer (KESt) in Österreich: Was wird besteuert, wie hoch ist der Satz, und wer führt sie ab?"
-pubDate: 2026-07-25
+pubDate: 2026-07-28
 category: "Steuern"
 tags: ["KESt", "Steuern", "Kapitalertragsteuer", "Österreich"]
 ---
