@@ -3,7 +3,12 @@ interface Props {
   compact?: boolean;
 }
 const { compact = false } = Astro.props;
-const contactEmail = 'kontakt@geld-kompass.at';
+
+// Brevo-Formular (Liste "Geldkompass Newsletter", Double-Opt-in aktiv).
+// Bestätigungs-Redirects sind in Brevo auf /newsletter/bestaetigen und
+// /newsletter/willkommen konfiguriert.
+const brevoAction =
+  'https://989769fc.sibforms.com/serve/MUIFAJXMzZfgxr_1OZk9p26cF7KzsQxd2GDR3Pj5BAtqesttqP_Ipkmvwxx-xhdSRXMKM7cNp_qyLIgRWojjs-RI6SOlCtKJwF0YfyyqYXtAvzmCUhgouulc4avncDRMd9QnoBPru_OhF3eOvNMNjmNrigwQN4xsjVC29-s9y_bNzV3EAWR7pPZ0vZCqext5MD4RonXYNTMdkfKHkw==';
 ---
 
 <div
@@ -13,66 +18,53 @@ const contactEmail = 'kontakt@geld-kompass.at';
   ]}
   style="background-color: var(--color-navy-900); border-color: var(--color-navy-800);"
 >
-  <span
-    class="inline-block rounded-full px-3 py-1 text-xs font-semibold tracking-wide uppercase"
-    style="background-color: var(--color-gold-500); color: var(--color-navy-950);"
-  >
-    Bald verfügbar
-  </span>
-  <h3 class="mt-4 font-display text-2xl font-semibold text-white">
+  <h3 class="font-display text-2xl font-semibold text-white">
     Der Geldkompass-Newsletter
   </h3>
   <p class="mx-auto mt-2 max-w-md text-sm leading-relaxed" style="color: var(--color-navy-500);">
     Neue Artikel, Steuer-Updates und Finanzthemen direkt ins Postfach — kein Spam,
-    unregelmäßig aber wertvoll. Der automatische Versand ist noch im Aufbau.
+    unregelmäßig, aber nur wenn's wirklich etwas zu sagen gibt.
   </p>
 
   <form
-    id="newsletter-form"
+    method="POST"
+    action={brevoAction}
     class="mx-auto mt-6 flex max-w-sm flex-col gap-3 sm:flex-row"
-    data-contact={contactEmail}
   >
-    <label for="newsletter-email" class="sr-only">E-Mail-Adresse</label>
+    <label for="EMAIL" class="sr-only">E-Mail-Adresse</label>
     <input
-      id="newsletter-email"
+      id="EMAIL"
+      name="EMAIL"
       type="email"
+      autocomplete="off"
       required
       placeholder="deine@email.at"
       class="w-full rounded-lg border-0 px-4 py-2.5 text-sm text-ink-900 placeholder:text-ink-500 focus:outline-none focus:ring-2"
       style="background-color: var(--color-cream-50); --tw-ring-color: var(--color-gold-500);"
     />
+
+    <!-- Honeypot gegen Spam-Bots, muss leer bleiben -->
+    <input
+      type="text"
+      name="email_address_check"
+      value=""
+      tabindex="-1"
+      autocomplete="off"
+      style="position: absolute; left: -9999px;"
+    />
+    <input type="hidden" name="locale" value="de" />
+    <input type="hidden" name="html_type" value="simple" />
+
     <button
       type="submit"
       class="shrink-0 rounded-lg px-5 py-2.5 text-sm font-semibold transition-colors"
       style="background-color: var(--color-gold-500); color: var(--color-navy-950);"
     >
-      Vormerken lassen
+      Anmelden
     </button>
   </form>
-  <p id="newsletter-note" class="mt-3 text-xs" style="color: var(--color-navy-600);">
-    Öffnet dein E-Mail-Programm mit einer vorausgefüllten Anfrage — so landest du auf der Liste,
-    sobald der Newsletter startet.
+  <p class="mt-3 text-xs" style="color: var(--color-navy-600);">
+    Du bekommst gleich eine Bestätigungsmail — erst nach Klick auf den Link darin bist du
+    angemeldet (Double-Opt-in).
   </p>
 </div>
-
-<script>
-  const form = document.getElementById('newsletter-form') as HTMLFormElement | null;
-  const note = document.getElementById('newsletter-note');
-
-  form?.addEventListener('submit', (event) => {
-    event.preventDefault();
-    const email = (document.getElementById('newsletter-email') as HTMLInputElement)?.value.trim();
-    const contact = form.dataset.contact;
-    if (!email || !contact) return;
-
-    const subject = encodeURIComponent('Newsletter-Anmeldung Geldkompass');
-    const body = encodeURIComponent(
-      `Hallo,\n\nbitte trag mich mit dieser Adresse in den Geldkompass-Newsletter ein:\n${email}\n\nDanke!`
-    );
-    window.location.href = `mailto:${contact}?subject=${subject}&body=${body}`;
-
-    if (note) {
-      note.textContent = 'Dein E-Mail-Programm öffnet sich gleich mit einer vorausgefüllten Nachricht.';
-    }
-  });
-</script>

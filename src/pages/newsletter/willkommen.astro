@@ -1,0 +1,50 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout
+  title="Willkommen"
+  description="Deine Anmeldung zum Geldkompass-Newsletter ist bestätigt."
+>
+  <div class="mx-auto max-w-2xl px-5 py-24 text-center sm:px-8">
+    <span
+      class="inline-flex h-14 w-14 items-center justify-center rounded-full"
+      style="background-color: var(--color-gold-500);"
+    >
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+        <path
+          d="M5 12.5l4.5 4.5L19 7"
+          stroke="var(--color-navy-950)"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </span>
+
+    <h1 class="mt-6 font-display text-3xl font-bold sm:text-4xl" style="color: var(--color-navy-950);">
+      Willkommen an Bord
+    </h1>
+    <p class="mx-auto mt-4 max-w-md text-lg leading-relaxed" style="color: var(--color-ink-700);">
+      Deine Anmeldung ist bestätigt. Ab jetzt bekommst du neue Artikel und Steuer-Updates direkt
+      ins Postfach — unregelmäßig, aber nur wenn's wirklich etwas zu sagen gibt.
+    </p>
+
+    <div class="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
+      <a
+        href="/blog"
+        class="inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold transition-transform hover:-translate-y-0.5"
+        style="background-color: var(--color-navy-950); color: white;"
+      >
+        Artikel entdecken
+      </a>
+      <a
+        href="/"
+        class="inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold"
+        style="color: var(--color-navy-700);"
+      >
+        Zurück zur Startseite
+      </a>
+    </div>
+  </div>
+</Layout>
