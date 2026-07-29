@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://geld-kompass.at/sitemap-index.xml

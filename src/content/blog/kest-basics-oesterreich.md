@@ -20,7 +20,8 @@ dein Geld für dich "arbeitet", statt dass du dafür arbeitest. Sie betrifft ins
 - **Kursgewinne** beim Verkauf von Aktien, ETFs oder Anleihen.
 - **Dividenden** aus Aktien.
 - **Ausschüttungen und Erträge** aus Fonds/ETFs, inklusive der Erträge thesaurierender ETFs, die
-  du nie ausgezahlt bekommst, aber steuerlich trotzdem "zufließen".
+  du nie ausgezahlt bekommst, aber steuerlich trotzdem "zufließen" (mehr zum Unterschied
+  ausschüttend/thesaurierend in unserem [Artikel zum ETF-Sparplan-Start](/blog/etf-sparplan-oesterreich-starten)).
 - **Zinsen** auf Sparbücher und Anleihen.
 
 ## Wie hoch ist der Steuersatz?
