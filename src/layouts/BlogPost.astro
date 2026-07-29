@@ -39,9 +39,35 @@ const relatedPosts = scored
   .sort((a, b) => b.score - a.score || b.post.data.pubDate.valueOf() - a.post.data.pubDate.valueOf())
   .slice(0, 3)
   .map(({ post }) => post);
+
+// Strukturierte Daten (JSON-LD) für Google, z. B. für Rich Snippets mit Datum/Autor.
+const canonicalURL = new URL(`/blog/${entry.id}`, Astro.site).toString();
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  datePublished: pubDate.toISOString(),
+  dateModified: (updatedDate ?? pubDate).toISOString(),
+  inLanguage: 'de-AT',
+  author: {
+    '@type': 'Person',
+    name: 'Luis Rosenfeld',
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'Geldkompass',
+    url: 'https://geld-kompass.at',
+  },
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': canonicalURL,
+  },
+};
 ---
 
 <Layout title={title} description={description} type="article">
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   <article class="mx-auto max-w-3xl px-5 py-14 sm:px-8">
     <a href="/blog" class="inline-flex items-center gap-1.5 text-sm font-medium" style="color: var(--color-navy-700);">
       <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
