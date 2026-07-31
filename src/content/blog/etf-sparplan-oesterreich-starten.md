@@ -1,7 +1,7 @@
 ---
 title: "ETF-Sparplan in Österreich starten – Schritt für Schritt"
 description: "Wie du als Einsteiger in Österreich einen ETF-Sparplan aufsetzt: von der Depotwahl über die ETF-Auswahl bis zur ersten Sparrate."
-pubDate: 2026-07-21
+pubDate: 2026-07-17
 category: "Investieren"
 tags: ["ETF", "Sparplan", "Einsteiger", "Depot"]
 ---
