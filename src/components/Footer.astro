@@ -1,50 +1,41 @@
 ---
-import Logo from './Logo.astro';
-
 const year = new Date().getFullYear();
+
+const links = [
+  { href: '/blog', label: 'Blog' },
+  { href: '/ueber-mich', label: 'Über mich' },
+  { href: '/newsletter', label: 'Newsletter' },
+  { href: '/kontakt', label: 'Kontakt' },
+  { href: '/impressum', label: 'Impressum' },
+  { href: '/impressum#disclaimer', label: 'Disclaimer' },
+  { href: '/datenschutz', label: 'Datenschutz' },
+];
 ---
 
-<footer class="border-t" style="border-color: var(--color-cream-200); background-color: var(--color-navy-950);">
-  <div class="mx-auto max-w-6xl px-5 py-14 sm:px-8">
-    <div class="grid gap-10 sm:grid-cols-2 md:grid-cols-4">
-      <div class="md:col-span-2">
-        <a href="/" class="inline-flex items-center gap-2.5">
-          <svg width="30" height="30" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="17" cy="17" r="15.5" stroke="var(--color-gold-500)" stroke-width="2" />
-            <circle cx="17" cy="17" r="1.6" fill="var(--color-gold-500)" />
-            <path d="M17 7L20.5 15.5L17 27L13.5 15.5L17 7Z" fill="var(--color-cream-50)" />
-          </svg>
-          <span class="font-display text-lg font-semibold text-white">Geldkompass</span>
-        </a>
-        <p class="mt-4 max-w-sm text-sm leading-relaxed" style="color: var(--color-navy-500);">
-          Orientierung im Finanz- und Steuerdschungel — verständlich erklärt, mit besonderem
-          Fokus auf Kapitalanlage und Steuern in Österreich.
-        </p>
-      </div>
+<footer style="background-color: var(--color-navy-950);">
+  <div class="mx-auto max-w-6xl px-5 py-8 sm:px-8">
+    <div class="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
+      <a href="/" class="inline-flex items-center gap-2.5">
+        <svg width="26" height="26" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="17" cy="17" r="15.5" stroke="var(--color-gold-500)" stroke-width="2" />
+          <circle cx="17" cy="17" r="1.6" fill="var(--color-gold-500)" />
+          <path d="M17 7L20.5 15.5L17 27L13.5 15.5L17 7Z" fill="var(--color-cream-50)" />
+        </svg>
+        <span class="font-display text-base font-semibold text-white">Geldkompass</span>
+      </a>
 
-      <div>
-        <h3 class="font-display text-sm font-semibold text-white">Navigation</h3>
-        <ul class="mt-4 space-y-2.5 text-sm" style="color: var(--color-navy-500);">
-          <li><a href="/blog" class="hover:text-white">Blog</a></li>
-          <li><a href="/ueber-mich" class="hover:text-white">Über mich</a></li>
-          <li><a href="/newsletter" class="hover:text-white">Newsletter</a></li>
-          <li><a href="/kontakt" class="hover:text-white">Kontakt</a></li>
+      <nav aria-label="Footer">
+        <ul class="flex flex-wrap gap-x-5 gap-y-2 text-sm" style="color: var(--color-navy-500);">
+          {links.map((link) => (
+            <li><a href={link.href} class="transition-colors hover:text-white">{link.label}</a></li>
+          ))}
         </ul>
-      </div>
-
-      <div>
-        <h3 class="font-display text-sm font-semibold text-white">Rechtliches</h3>
-        <ul class="mt-4 space-y-2.5 text-sm" style="color: var(--color-navy-500);">
-          <li><a href="/impressum" class="hover:text-white">Impressum</a></li>
-          <li><a href="/impressum#disclaimer" class="hover:text-white">Disclaimer</a></li>
-          <li><a href="/datenschutz" class="hover:text-white">Datenschutz</a></li>
-        </ul>
-      </div>
+      </nav>
     </div>
 
-    <div class="mt-12 flex flex-col gap-3 border-t pt-6 text-xs sm:flex-row sm:items-center sm:justify-between" style="border-color: var(--color-navy-800); color: var(--color-navy-600);">
+    <div class="mt-6 flex flex-col gap-2 border-t pt-5 text-xs sm:flex-row sm:items-center sm:justify-between" style="border-color: var(--color-navy-800); color: var(--color-navy-600);">
       <p>&copy; {year} Geldkompass. Alle Angaben ohne Gewähr.</p>
-      <p>Keine Anlageberatung — nur Bildung. Siehe <a href="/impressum#disclaimer" class="underline hover:text-white">Disclaimer</a>.</p>
+      <p>Keine Anlageberatung, nur Bildung.</p>
     </div>
   </div>
 </footer>

@@ -12,20 +12,23 @@ const topics = [
   {
     name: 'Investieren',
     title: 'Investieren von Grund auf',
-    description: 'ETFs, Depots, Diversifikation — die Basics für alle, die gerade erst starten.',
+    description: 'ETFs, Depots und Diversifikation. Die Basics für alle, die gerade erst anfangen.',
     accent: 'var(--color-cat-investieren)',
+    icon: 'M4 19h16M6 15l4-4 3 3 5-6M15 8h3v3',
   },
   {
     name: 'Steuern',
     title: 'Steuern in Österreich',
-    description: 'KESt, Meldefonds, Verlustausgleich — verständlich erklärt, ohne Juristendeutsch.',
+    description: 'KESt, Meldefonds und Verlustausgleich, erklärt ohne Juristendeutsch.',
     accent: 'var(--color-cat-steuern)',
+    icon: 'M7 3h7l4 4v14H7zM14 3v4h4M10 16l5-5M10.5 11.5h.01M14.5 15.5h.01',
   },
   {
     name: 'Wirtschaft',
     title: 'Wirtschaft & Aktuelles',
     description: 'Einordnung von Zinsentscheidungen, Inflation und anderen Ereignissen am Markt.',
     accent: 'var(--color-cat-wirtschaft)',
+    icon: 'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM3.6 9h16.8M3.6 15h16.8M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18',
   },
 ];
 ---
@@ -53,11 +56,11 @@ const topics = [
         Finanzen &amp; Steuern in Österreich
       </span>
       <h1 class="mt-6 max-w-2xl font-display text-4xl font-bold leading-tight text-white sm:text-5xl">
-        Orientierung im Finanz&shy;dschungel — verständlich erklärt.
+        Orientierung im Finanz&shy;dschungel, verständlich erklärt.
       </h1>
       <p class="mt-5 max-w-xl text-lg leading-relaxed" style="color: var(--color-navy-500);">
-        Geldkompass hilft dir, Investieren und Steuern in Österreich wirklich zu verstehen — ohne
-        Fachjargon, ohne Verkaufsdruck. Ich baue mein Wissen und mein eigenes Portfolio hier
+        Geldkompass hilft dir, Investieren und Steuern in Österreich wirklich zu verstehen. Ohne
+        Fachchinesisch und ohne dir etwas verkaufen zu wollen. Ich baue mein Wissen und mein eigenes Portfolio hier
         transparent mit auf.
       </p>
       <div class="mt-8 flex flex-wrap gap-4">
@@ -86,16 +89,32 @@ const topics = [
       {topics.map((topic) => (
         <a
           href={`/blog#${topic.name.toLowerCase()}`}
-          class="group rounded-2xl border p-6 transition-all hover:-translate-y-0.5 hover:shadow-lg"
-          style="border-color: var(--color-cream-200); background-color: white;"
+          class="group flex flex-col rounded-2xl border-2 p-6 transition-all hover:-translate-y-1 hover:shadow-lg"
+          style={`border-color: color-mix(in srgb, ${topic.accent} 25%, transparent); background-color: white;`}
         >
-          <span class="inline-block h-2 w-8 rounded-full" style={`background-color: ${topic.accent};`} />
+          <span
+            class="flex h-12 w-12 items-center justify-center rounded-xl"
+            style={`background-color: color-mix(in srgb, ${topic.accent} 12%, transparent); color: ${topic.accent};`}
+          >
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d={topic.icon} />
+            </svg>
+          </span>
           <h3 class="mt-4 font-display text-lg font-semibold" style="color: var(--color-navy-950);">
             {topic.title}
           </h3>
-          <p class="mt-2 text-sm leading-relaxed" style="color: var(--color-ink-700);">
+          <p class="mt-2 flex-1 text-sm leading-relaxed" style="color: var(--color-ink-700);">
             {topic.description}
           </p>
+          <span
+            class="mt-5 inline-flex items-center gap-2 self-start rounded-lg px-4 py-2 text-sm font-semibold text-white transition-transform group-hover:translate-x-0.5"
+            style={`background-color: ${topic.accent};`}
+          >
+            Zu den Artikeln
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </span>
         </a>
       ))}
     </div>
@@ -127,10 +146,10 @@ const topics = [
       Warum Geldkompass?
     </h2>
     <p class="mx-auto mt-4 max-w-2xl text-lg leading-relaxed" style="color: var(--color-ink-700);">
-      Die meisten deutschsprachigen Finanzblogs erklären Investieren allgemein — die
-      österreichische Steuerperspektive kommt oft zu kurz. Genau da setzt Geldkompass an: fundiert
-      durch mein laufendes Studium im Finanz-, Steuer- und Rechnungswesen, kombiniert mit den
-      Investieren-Themen, die jede:r Einsteiger:in kennen sollte.
+      Die meisten deutschsprachigen Finanzblogs erklären Investieren eher allgemein, und die
+      österreichischen Steuern kommen oft zu kurz. Hier setzt Geldkompass an. Was ich im Studium
+      zu Finanzen und Steuern lerne, verbinde ich mit den Grundlagen, die jede:r Einsteiger:in
+      beim Investieren kennen sollte.
     </p>
   </section>
 
