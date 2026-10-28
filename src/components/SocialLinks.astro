@@ -1,0 +1,56 @@
+---
+// Social-Media-Kanäle von Geldkompass.
+// Neuen Kanal hinzufügen: einfach bei `href` den Profil-Link eintragen. Leere Links werden nicht angezeigt.
+interface Props {
+  variant?: 'dark' | 'light';
+  class?: string;
+}
+
+const { variant = 'light', class: className = '' } = Astro.props;
+
+const channels = [
+  {
+    label: 'Instagram',
+    href: 'https://www.instagram.com/geldkompass.at/',
+    icon: '<rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor"/>',
+  },
+  {
+    label: 'YouTube',
+    href: 'https://www.youtube.com/@Geld-kompass-at',
+    icon: '<rect x="2" y="5" width="20" height="14" rx="4" fill="currentColor"/><path d="M10 9l5 3-5 3z" fill="var(--yt-play)"/>',
+  },
+  {
+    label: 'TikTok',
+    href: '', // TODO: Link eintragen, sobald der Kanal da ist
+    icon: '<path d="M16.5 3c.3 2.2 1.7 3.8 4 4v3c-1.5 0-2.9-.4-4-1.2V15a6 6 0 1 1-6-6v3.1a3 3 0 1 0 3 2.9V3z" fill="currentColor"/>',
+  },
+  {
+    label: 'X',
+    href: 'https://x.com/Geldkompass',
+    icon: '<path d="M17.8 3h3.1l-6.8 7.7L22 21h-6.2l-4.9-6.4L5.3 21H2.2l7.2-8.3L1.8 3h6.4l4.4 5.8zm-1.1 16.2h1.7L7.3 4.7H5.5z" fill="currentColor"/>',
+  },
+].filter((c) => c.href);
+
+const isDark = variant === 'dark';
+const linkStyle = isDark
+  ? 'color: var(--color-navy-500); border-color: var(--color-navy-800); --yt-play: var(--color-navy-950);'
+  : 'color: var(--color-navy-950); border-color: var(--color-cream-200); background-color: white; --yt-play: white;';
+---
+
+<ul class={`flex items-center gap-2.5 ${className}`}>
+  {channels.map((c) => (
+    <li>
+      <a
+        href={c.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`Geldkompass auf ${c.label}`}
+        title={c.label}
+        class={`flex h-9 w-9 items-center justify-center rounded-full border transition-colors ${isDark ? 'hover:text-white hover:border-white/40' : 'hover:border-current'}`}
+        style={linkStyle}
+      >
+        <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" set:html={c.icon} />
+      </a>
+    </li>
+  ))}
+</ul>

@@ -1,4 +1,6 @@
 ---
+import SocialLinks from './SocialLinks.astro';
+
 const year = new Date().getFullYear();
 
 const links = [
@@ -15,6 +17,7 @@ const links = [
 <footer style="background-color: var(--color-navy-950);">
   <div class="mx-auto max-w-6xl px-5 py-8 sm:px-8">
     <div class="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
+      <div class="flex items-center gap-5">
       <a href="/" class="inline-flex items-center gap-2.5">
         <svg width="26" height="26" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="17" cy="17" r="15.5" stroke="var(--color-gold-500)" stroke-width="2" />
@@ -23,6 +26,8 @@ const links = [
         </svg>
         <span class="font-display text-base font-semibold text-white">Geldkompass</span>
       </a>
+      <SocialLinks variant="dark" />
+      </div>
 
       <nav aria-label="Footer">
         <ul class="flex flex-wrap gap-x-5 gap-y-2 text-sm" style="color: var(--color-navy-500);">
